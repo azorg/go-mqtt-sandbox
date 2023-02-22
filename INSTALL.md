@@ -35,7 +35,7 @@ mosquitto_pub -h localhost -t "topic/subtopic" -m "meaasge"
 Переходим в браузере на https://github.com/eclipse/paho.mqtt.golang
 и читаем инструкцию (RAEDME.md).
 
-Выполяем инструкцию:
+Выполняем инструкцию:
 ```bash
 go get github.com/eclipse/paho.mqtt.golang
 
@@ -44,27 +44,10 @@ go get golang.org/x/net/proxy
 ```
 Если все прошло без ошибок, то весь репозиторий проекта MQTT
 клонируется в $GOPATH/src/github.com/eclipse/paho.mqtt.golang/.
-Посмотеть GOPATH можно так: `go env | grep GOPATH`, т.к.
+Посмотреть GOPATH можно так: `go env | grep GOPATH`, т.к.
 в переменных окружения оболочки он у меня не задан.
 В моём случае GOPATH="/home/user/go".
 
-В каталоге cmd репозитория есть много примеров.
-Для сборки примеров нужно перейти в данный каталог и
-запустить ./build.sh следующего триывиального содерджания:
-```bash
-#!/bin/sh
-
-for dir in `ls -d */ | cut -f1 -d'/'`
-do
-    echo "Compiling $dir ...\c"
-    cd $dir
-    go clean
-    go build
-    cd ..
-    echo " done."
-done
-```
-Занятно, что в коде присутсвует "Copyright (c) 2021 IBM Corp and others".
+Занятно, что в коде присутствует "Copyright (c) 2021 IBM Corp and others".
 Код распространяется под лицензией "Eclipse Public License - v 2.0 (EPL-2.0)".
-
 
