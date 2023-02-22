@@ -51,3 +51,9 @@ go get golang.org/x/net/proxy
 Занятно, что в коде присутствует "Copyright (c) 2021 IBM Corp and others".
 Код распространяется под лицензией "Eclipse Public License - v 2.0 (EPL-2.0)".
 
+## 4. Как настроить поддержку SSL/TLS в Mosquitto
+* читать `man mosquitto-tls`
+* читать `man mosquitto`
+* читать `man mosquitto.conf`
+* см. каталог `tls`  
+

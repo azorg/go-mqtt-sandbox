@@ -23,3 +23,15 @@
 examples/mqtt_tcp_pub/mqtt_tcp_pub
 examples/mqtt_tcp_sub/mqtt_tcp_sub
 
+# keys
+ca.crt
+ca.key
+ca.srl
+client.crt
+client.csr
+client.key
+server.crt
+server.csr
+server.key
+
+
