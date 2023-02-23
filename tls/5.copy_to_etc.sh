@@ -1,5 +1,10 @@
 #!/bin/sh
 
+#sudo cp ca-fake/ca-fake.crt /etc/ssl/certs/ca-fake.pem
+sudo cp ca/ca.crt /etc/ssl/certs/ca-fake.pem
+
+sudo update-ca-certificates --fresh
+
 sudo cp ca/ca.crt /etc/mosquitto/ca_certificates/
 
 sudo cp server/server.crt /etc/mosquitto/certs/

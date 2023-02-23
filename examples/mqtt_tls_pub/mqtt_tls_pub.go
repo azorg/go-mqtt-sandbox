@@ -1,6 +1,6 @@
 /*
- * Пример простого MQTT издателя на Golang
- * File: "mqtt_tcp_pub.go"
+ * Пример MQTT издателя на Golang с использованием TLS
+ * File: "mqtt_tls_pub.go"
  */
 
 package main
@@ -14,8 +14,8 @@ import (
 )
 
 const (
-	URI = "tcp://localhost:1883"
-	ID  = "sample_tcp"
+	URI = "tcp://localhost:8883"
+	ID  = "sample_tls"
 
 	DEBUG = true
 
@@ -24,8 +24,8 @@ const (
 	CONNECT_TIMEOUT = 5 * time.Second
 	PUB_TIMEOUT     = 5 * time.Second
 
-	TOPIC = "sample/TCP"
-	TEXT  = "Hello MQTT Go!"
+	TOPIC = "sample/TLS"
+	TEXT  = "Hello MQTT/TLS Go!"
 
 	QOS = 2 // 0 - отправил забыл, 1 - минимум одно, 2 - ровно одно
 )

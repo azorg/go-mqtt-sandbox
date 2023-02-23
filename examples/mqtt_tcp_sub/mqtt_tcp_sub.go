@@ -47,10 +47,10 @@ func wait_ch(ch <-chan struct{}, timeout time.Duration) bool {
 
 func main() {
 	if DEBUG {
-		mqtt.ERROR = log.New(os.Stdout, "ERR:", 0)
+		mqtt.ERROR    = log.New(os.Stdout, "ERR:",  0)
 		mqtt.CRITICAL = log.New(os.Stdout, "CRIT:", 0)
-		mqtt.WARN = log.New(os.Stdout, "WARN:", 0)
-		mqtt.DEBUG = log.New(os.Stdout, "DBG:", 0)
+		mqtt.WARN     = log.New(os.Stdout, "WARN:", 0)
+		mqtt.DEBUG    = log.New(os.Stdout, "DBG:",  0)
 	}
 
 	// задать опции подключения к MQTT брокеру

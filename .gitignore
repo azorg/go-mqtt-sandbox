@@ -24,9 +24,14 @@ examples/mqtt_tcp_pub/mqtt_tcp_pub
 examples/mqtt_tcp_sub/mqtt_tcp_sub
 
 # keys
+ca-fake.crt
+ca-fake.key
+ca-fake.srl
+ca-fake.csr
 ca.crt
 ca.key
 ca.srl
+ca.csr
 client.crt
 client.csr
 client.key
