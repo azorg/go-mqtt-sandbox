@@ -2,6 +2,8 @@
 
 DAYS="3653" # 10 years
 
+NODES="-nodes"
+
 function getipaddresses() {
   /sbin/ifconfig |
           grep -v tunnel |
@@ -38,21 +40,21 @@ mkdir -p server
 mkdir -p client
 
 echo "*** Create un-encrypted (!) CA key (ca.key, ca.crt)"
-openssl req -newkey rsa:4096 -x509 -nodes -sha512 -days $DAYS -extensions v3_ca \
-        -subj "/CN=An MQTT broker/O=localhost/OU=generate-CA/emailAddress=nobody@example.net" \
+openssl req -newkey rsa:4096 -x509 $NODES -sha512 -days $DAYS -extensions v3_ca \
+        -subj "/CN=Fake root CA/O=localhost/OU=generate-CA/emailAddress=root@example.net" \
         -keyout ca/ca.key -out ca/ca.crt
-
-echo "*** Created CA certificate (ca.crt):"
-openssl x509 -in ca/ca.crt -nameopt multiline -subject -noout
 
 echo "*** Warning: the CA key (ca.key) is not encrypted; store it safely!"
 chmod 400 ca/ca.key
 chmod 444 ca/ca.crt
 
+echo "*** View CA certificate (ca.crt):"
+openssl x509 -in ca/ca.crt -nameopt multiline -subject -noout
+
 echo "*** Creating server key and signing request (server.key, server.csr)"
 openssl genrsa -out server/server.key 4096
 openssl req -new -sha512 \
-        -subj "/CN=An MQTT broker/O=localhost/OU=generate-CA/emailAddress=nobody@example.net" \
+        -subj "/CN=An MQTT broker/O=localhost/OU=generate-CA/emailAddress=broker@example.net" \
         -key server/server.key \
         -out server/server.csr
 
@@ -83,7 +85,7 @@ sed -e 's/^.*%%% //' > $CNF <<\!ENDconfig
 %%% 
 %%% [notice]
 %%% explicitText            = "This CA is for a local MQTT broker installation only"
-%%% organization            = "None Labs"
+%%% organization            = "Null Labs"
 %%% noticeNumbers           = 1
 !ENDconfig
 
@@ -100,7 +102,7 @@ openssl x509 -req -sha512 \
         -CAcreateserial \
         -in  server/server.csr \
         -out server/server.crt
-        #-extensions JPMextensions \
+        #-extensions JPMclientextensions \
 
 rm -f $CNF
 chmod 444 server/server.crt
@@ -119,9 +121,9 @@ sed -e 's/^.*%%% //' > $CNF <<!ENDClientconfigREQ
 %%% output_password    = secret
 %%% 
 %%% [ req_distinguished_name ]
-%%% # O                       = OwnTracks
+%%% # O                       = Nobody
 %%% # OU                      = MQTT
-%%% # CN                      = Suzie Smith
+%%% # CN                      = User
 %%% CN                        = client
 %%% # emailAddress            = client
 !ENDClientconfigREQ
@@ -157,7 +159,7 @@ openssl x509 -req -sha512 \
         -CAcreateserial \
         -in  client/client.csr \
         -out client/client.crt
-        #-extensions JPMclientextensions
+        #-extensions JPMclientextensions \
 
 rm -f $CNF
 chmod 444 client/client.crt

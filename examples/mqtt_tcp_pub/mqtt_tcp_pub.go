@@ -7,10 +7,11 @@ package main
 
 import (
 	"fmt"
-	mqtt "github.com/eclipse/paho.mqtt.golang"
 	"log"
 	"os"
 	"time"
+
+	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
 
 const (
@@ -42,10 +43,10 @@ func wait_ch(ch <-chan struct{}, timeout time.Duration) bool {
 
 func main() {
 	if DEBUG {
-		mqtt.ERROR    = log.New(os.Stdout, "ERR:",  0)
+		mqtt.ERROR = log.New(os.Stdout, "ERR:", 0)
 		mqtt.CRITICAL = log.New(os.Stdout, "CRIT:", 0)
-		mqtt.WARN     = log.New(os.Stdout, "WARN:", 0)
-		mqtt.DEBUG    = log.New(os.Stdout, "DBG:",  0)
+		mqtt.WARN = log.New(os.Stdout, "WARN:", 0)
+		mqtt.DEBUG = log.New(os.Stdout, "DBG:", 0)
 	}
 
 	// задать опции подключения к MQTT брокеру
@@ -57,7 +58,7 @@ func main() {
 	c := mqtt.NewClient(opts)
 	t := c.Connect()
 
-	// ждать подключения к брокеру
+	// ждать подключения к брокеру (вместо t.Wait())
 	if !wait_ch(t.Done(), CONNECT_TIMEOUT) {
 		panic("Cnnect timeout")
 	} else if t.Error() != nil {
@@ -68,9 +69,8 @@ func main() {
 	fmt.Println("publish TOPIC='" + TOPIC + "' TEXT='" + TEXT + "'")
 	t = c.Publish(TOPIC, QOS, false, TEXT)
 
-	// ждать завершения отправки сообщения
-	// t.Wait()
-	if !wait_ch(t.Done(), CONNECT_TIMEOUT) {
+	// ждать завершения отправки сообщения (вместо t.Wait())
+	if !wait_ch(t.Done(), PUB_TIMEOUT) {
 		fmt.Println("Publish timeout")
 	}
 

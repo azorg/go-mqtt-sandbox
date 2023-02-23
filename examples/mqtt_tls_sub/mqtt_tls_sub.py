@@ -28,10 +28,11 @@ def on_disconnect(client, userdata, flags, rc=None):
 # the callback for when a PUBLISH message is received from the server
 def on_message(client, userdata, msg):
     print("TOPIC=" + msg.topic + \
-          " TEXT=" + str(msg.payload.decode("utf-8")) + \
+          " TEXT=" + str(msg.payload.decode("utf-8")) +
           " QoS=" + str(msg.qos))
 
 client = mqtt.Client("mqtt_client")
+
 #client.on_log = on_log
 client.on_connect = on_connect
 client.on_disconnect = on_disconnect
@@ -52,21 +53,13 @@ while not CONN_FLAG:
 print("Subscribing to topic", TOPIC)
 client.subscribe(TOPIC)
 
-time.sleep(3)
-
-client.publish(TOPIC, "Hello from Python!")
-
-time.sleep(2)
-
-client.loop()
-
-time.sleep(2)
+#client.loop()
 
 # Blocking call that processes network traffic, dispatches callbacks and
 # handles reconnecting.
 # Other loop*() functions are available that give a threaded interface and a
 # manual interface.
-#client.loop_forever()
+client.loop_forever()
 
 client.disconnect()
 

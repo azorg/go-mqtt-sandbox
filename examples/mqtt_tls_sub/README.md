@@ -1,5 +1,5 @@
-Пример MQTT издателя на Golang с использованием TLS
-===================================================
+Пример MQTT подписчика на Golang с использованием TLS
+=====================================================
 
 ## Как проверить?
 0. Настроить mosquito для работы на порте 8883 с TLS (см. пример tls/etc/mosquitto/conf.d/tls.conf)
@@ -21,13 +21,16 @@ openssl s_client -showcerts -connect localhost:8883 < /dev/null \
         -CAfile ca/ca.crt -key client/client.key -cert client/client.crt \
         -status -debug
 ```
+ 
+3. Запустить `go run mqtt_sub_tls.go` для проверки приёма сообщений от издателя
 
-3. Запустить в отдельном терминале MQTT подписчик (один или несколько):
+4. Запустить в отдельном терминале MQTT издатель:
 ```bash
 mosquitto_sub --cafile ca/ca.crt --cert client/client.crt --key client/client.key -p 8883 \
-              -q 2 -h localhost -q 2 -d -t "sample/TLS"
+              -q 2 -h localhost -q 2 -d --insecure \
+              -t "sample/TLS"  "Hello Go!"
 ```
 
-4. Запустить `go run mqtt_pub_tls.go` и проверить доставку сообщений подписчиками...
+
 
 
