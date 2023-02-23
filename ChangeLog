@@ -8,6 +8,7 @@
  * пока получаю ошибки:
    - на стороне сервера: SSL routines:ssl3_read_bytes:tlsv1 alert unknown ca
    - на стороне клиента: certificate verify failed: self signed certificate
+ ! Рррррррр!!!!!
 
 2023.02.22:
  * начало работы в песочнице
