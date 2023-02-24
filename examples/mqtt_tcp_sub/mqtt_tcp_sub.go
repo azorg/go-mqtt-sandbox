@@ -11,7 +11,7 @@ import (
 	"os"
 	"time"
 
-        mqtt "github.com/eclipse/paho.mqtt.golang"
+	mqtt "github.com/eclipse/paho.mqtt.golang"
 )
 
 const (
