@@ -55,7 +55,7 @@ func NewTLSConfig() *tls.Config {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(cert.Leaf)
+	//fmt.Println(cert.Leaf)
 
 	// Create tls.Config with desired tls properties
 	return &tls.Config{

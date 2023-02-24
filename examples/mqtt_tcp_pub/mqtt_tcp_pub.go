@@ -18,7 +18,7 @@ const (
 	URI = "tcp://localhost:1883"
 	ID  = "sample_tcp"
 
-	DEBUG = true
+	DEBUG = false
 
 	KEEP_ALIVE      = 1 * time.Second
 	PING_TIMEOUT    = 2 * time.Second

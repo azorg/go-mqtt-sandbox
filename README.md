@@ -13,3 +13,10 @@
 
  * `examples/mqtt_tls_sub` - пример MQTT подписчика с использованием TLS (SSL)
 
+
+## Извесные ошибки (BUGS)
+
+ - Не доходят сообщни go -> mosqquitto -> go,
+   но go -> mosquitto -> mosquitto и
+   mosquitto -> mosquitto -> go доходят!
+
